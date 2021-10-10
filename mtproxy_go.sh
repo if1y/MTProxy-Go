@@ -489,22 +489,25 @@ Uninstall(){
 	fi
 }
 getipv4(){
-	ipv4=$(wget -qO- -4 -t1 -T2 ipinfo.io/ip)
-	if [[ -z "${ipv4}" ]]; then
-		ipv4=$(wget -qO- -4 -t1 -T2 api.ip.sb/ip)
-		if [[ -z "${ipv4}" ]]; then
-			ipv4=$(wget -qO- -4 -t1 -T2 members.3322.org/dyndns/getip)
-			if [[ -z "${ipv4}" ]]; then
-				ipv4="IPv4_Error"
-			fi
-		fi
-	fi
+        ipv4=$(wget -qO- -4 -t1 -T2 ip.zxinc.org/getip)
+        if [[ -z "${ipv4}" ]]; then
+                ipv4=$(wget -qO- -4 -t1 -T2 ident.me)
+                if [[ -z "${ipv4}" ]]; then
+                        ipv4=$(wget -qO- -4 -t1 -T2 ip.sb)
+                        if [[ -z "${ipv4}" ]]; then
+                                ipv4="IPv4_Error"
+                        fi
+                fi
+        fi
 }
 getipv6(){
-	ipv6=$(wget -qO- -6 -t1 -T3 ifconfig.co)
-	if [[ -z "${ipv6}" ]]; then
-		ipv6="IPv6_Error"
-	fi
+        ipv6=$(wget -qO- -6 -t1 -T3 ip.zxinc.org/getip)
+        if [[ -z "${ipv6}" ]]; then
+                ipv4=$(wget -qO- -4 -t1 -T2 ident.me)
+                if [[ -z "${ipv4}" ]]; then
+                        ipv6="IPv6_Error"
+                fi
+        fi
 }
 View(){
 	check_installed_status
