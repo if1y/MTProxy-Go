@@ -591,7 +591,7 @@ get_IP_address(){
 }
 Set_crontab_monitor(){
 	check_crontab_installed_status
-	crontab_monitor_status=$(crontab -l|grep "mtproxy_go.sh monitor")
+	crontab_monitor_status=$(crontab -l|grep "mtg.sh monitor")
 	if [[ -z "${crontab_monitor_status}" ]]; then
 		echo && echo -e "当前监控运行状态模式: ${Red_font_prefix}未开启${Font_color_suffix}" && echo
 		echo -e "确定要开启 ${Green_font_prefix}MTProxy 服务端运行状态监控${Font_color_suffix} 功能吗？(当进程关闭则自动启动 MTProxy 服务端)[Y/n]"
@@ -616,11 +616,11 @@ Set_crontab_monitor(){
 }
 crontab_monitor_cron_start(){
 	crontab -l > "$file_1/crontab.bak"
-	sed -i "/mtproxy_go.sh monitor/d" "$file_1/crontab.bak"
-	echo -e "\n* * * * * /bin/bash $file_1/mtproxy_go.sh monitor" >> "$file_1/crontab.bak"
+	sed -i "/mtg.sh monitor/d" "$file_1/crontab.bak"
+	echo -e "\n* * * * * /bin/bash $file_1/mtg.sh monitor" >> "$file_1/crontab.bak"
 	crontab "$file_1/crontab.bak"
 	rm -r "$file_1/crontab.bak"
-	cron_config=$(crontab -l | grep "mtproxy_go.sh monitor")
+	cron_config=$(crontab -l | grep "mtg.sh monitor")
 	if [[ -z ${cron_config} ]]; then
 		echo -e "${Error} MTProxy 服务端运行状态监控功能 启动失败 !" && exit 1
 	else
@@ -629,10 +629,10 @@ crontab_monitor_cron_start(){
 }
 crontab_monitor_cron_stop(){
 	crontab -l > "$file_1/crontab.bak"
-	sed -i "/mtproxy_go.sh monitor/d" "$file_1/crontab.bak"
+	sed -i "/mtg.sh monitor/d" "$file_1/crontab.bak"
 	crontab "$file_1/crontab.bak"
 	rm -r "$file_1/crontab.bak"
-	cron_config=$(crontab -l | grep "mtproxy_go.sh monitor")
+	cron_config=$(crontab -l | grep "mtg.sh monitor")
 	if [[ ! -z ${cron_config} ]]; then
 		echo -e "${Error} MTProxy 服务端运行状态监控功能 停止失败 !" && exit 1
 	else
@@ -659,7 +659,7 @@ crontab_monitor(){
 }
 Set_crontab_monitorip(){
 	check_crontab_installed_status
-	crontab_monitor_status=$(crontab -l|grep "mtproxy_go.sh monitorip")
+	crontab_monitor_status=$(crontab -l|grep "mtg.sh monitorip")
 	if [[ -z "${crontab_monitor_status}" ]]; then
 		echo && echo -e "当前监控外网IP模式: ${Red_font_prefix}未开启${Font_color_suffix}" && echo
 		echo -e "确定要开启 ${Green_font_prefix}服务器外网IP变更监控${Font_color_suffix} 功能吗？(当服务器外网IP变化后，自动重新配置并重启服务端)[Y/n]"
@@ -684,11 +684,11 @@ Set_crontab_monitorip(){
 }
 crontab_monitor_cron_start2(){
 	crontab -l > "$file_1/crontab.bak"
-	sed -i "/mtproxy_go.sh monitorip/d" "$file_1/crontab.bak"
-	echo -e "\n* * * * * /bin/bash $file_1/mtproxy_go.sh monitorip" >> "$file_1/crontab.bak"
+	sed -i "/mtg.sh monitorip/d" "$file_1/crontab.bak"
+	echo -e "\n* * * * * /bin/bash $file_1/mtg.sh monitorip" >> "$file_1/crontab.bak"
 	crontab "$file_1/crontab.bak"
 	rm -r "$file_1/crontab.bak"
-	cron_config=$(crontab -l | grep "mtproxy_go.sh monitorip")
+	cron_config=$(crontab -l | grep "mtg.sh monitorip")
 	if [[ -z ${cron_config} ]]; then
 		echo -e "${Error} 服务器外网IP变更监控功能 启动失败 !" && exit 1
 	else
@@ -697,10 +697,10 @@ crontab_monitor_cron_start2(){
 }
 crontab_monitor_cron_stop2(){
 	crontab -l > "$file_1/crontab.bak"
-	sed -i "/mtproxy_go.sh monitorip/d" "$file_1/crontab.bak"
+	sed -i "/mtg.sh monitorip/d" "$file_1/crontab.bak"
 	crontab "$file_1/crontab.bak"
 	rm -r "$file_1/crontab.bak"
-	cron_config=$(crontab -l | grep "mtproxy_go.sh monitorip")
+	cron_config=$(crontab -l | grep "mtg.sh monitorip")
 	if [[ ! -z ${cron_config} ]]; then
 		echo -e "${Error} 服务器外网IP变更监控功能 停止失败 !" && exit 1
 	else
